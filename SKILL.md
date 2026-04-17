@@ -1,9 +1,9 @@
 ---
-name: tideo-project-timeline
+name: project-timeline-board
 description: "This skill provides a project timeline management page with Gantt chart, key milestones tracking, todo lists, and status overview. Use this skill when the user needs to create a project progress dashboard, milestone tracker, release planner, sprint board, or any time-based project visualization for product development, design handoff, or engineering coordination."
 ---
 
-# Tideo Project Timeline Skill — 项目时间线管理看板 v2（数据驱动版）
+# Project Timeline Board Skill — 项目时间线管理看板 v2（数据驱动版）
 
 ## 🎯 5 分钟上手
 
@@ -76,7 +76,7 @@ description: "This skill provides a project timeline management page with Gantt 
 ## 文件结构
 
 ```
-tideo-project-timeline/
+project-timeline-board/
 ├── SKILL.md                          # 本文档
 ├── references/
 │   └── timeline-css.md              # CSS 变量速查表
@@ -194,7 +194,7 @@ todos: [
 ]
 ```
 
-**tag 类型**：`ix`(交互) / `vis`(视觉) / `plan`(规划) / `collab`(协作) / `tool`(工具)
+**tag 类型**：`ix`(交互) / `vis`(视觉) / `plan`(规划) / `collab`(协作) / `tool`(工具) / `fe`(前端) / `be`(后端) / `test`(测试)
 
 ### Extras 区域
 
@@ -261,7 +261,7 @@ extras: {
 
 ## 纯 HTML 使用（无需 JS 配置）
 
-如果不引入 `project-timeline-data.js` 和 `render-from-config.js`，页面会保留 HTML 中的原始内容（也是 Tideo 项目数据）。
+如果不引入 `project-timeline-data.js` 和 `render-from-config.js`，页面会保留 HTML 中的原始内容。
 
 这适合：
 - 想保留现成内容作为参考直接复制使用
@@ -291,10 +291,10 @@ extras: {
 ## 发布到 GitHub
 
 ```bash
-cd ~/.codebuddy/skills/tideo-project-timeline
+cd ~/.codebuddy/skills/project-timeline-board
 git init
 git add .
-git commit -m "feat: tideo-project-timeline v2 data-driven"
-git remote add origin https://github.com/YOUR_USERNAME/tideo-project-timeline.git
+git commit -m "feat: project-timeline-board v2 data-driven"
+git remote add origin https://github.com/YOUR_USERNAME/project-timeline-board.git
 git push -u origin main
 ```

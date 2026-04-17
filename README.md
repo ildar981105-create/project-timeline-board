@@ -1,10 +1,8 @@
-# Tideo Project Timeline
+# Project Timeline Board
 
 > 数据驱动的项目甘特图 + 里程碑 + 待办看板，无需构建开箱即用
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/ildar981105-create/tideo-project-timeline)](https://github.com/ildar981105-create/tideo-project-timeline/stargazers)
-[![GitHub topics](https://img.shields.io/github/topics/codebuddy-skill)](https://github.com/topics/codebuddy-skill)
 
 ## 🎯 5 分钟上手
 
@@ -46,4 +44,4 @@
 
 ## License
 
-MIT © Tideo
+MIT
