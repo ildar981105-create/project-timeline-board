@@ -5,6 +5,34 @@ description: "This skill provides a project timeline management page with Gantt 
 
 # Tideo Project Timeline Skill — 项目时间线管理看板 v2（数据驱动版）
 
+## 🎯 5 分钟上手
+
+### 最简配置（复制即用）
+
+1. **复制 `project-timeline-data.js`** 到你的项目目录
+2. **打开文件，修改 `projectName` / `overview` / `keyNodes` / `ganttData` / `todos`**（每项有中文注释）
+3. **在页面中引入：**
+
+```html
+<script src="project-timeline-data.js"></script>
+<script src="project-timeline.html"></script>
+<script src="render-from-config.js"></script>
+```
+
+### 核心定制项（文件内均有注释）
+
+| 字段 | 说明 | 示例值 |
+|------|------|-------|
+| `projectName` | 项目名称 | `'我的项目'` |
+| `overview` | 四宫格关键日期 | `[{date:'4.15',label:'交付',color:'blue'}]` |
+| `keyNodes` | 时间轴节点 | 见文件内模板 |
+| `ganttData` | 甘特图模块排期 | `[['首页',[{t:'ix',f:8,to:11}]]]` |
+| `todos` | 按周分组的待办清单 | 见文件内模板 |
+
+预计定制时间：**10-15 分钟**
+
+---
+
 ## 概述
 
 本 Skill 提供一个**完全数据驱动的项目时间线页面**，所有内容由 `project-timeline-data.js` 配置，无需修改 HTML。
@@ -170,6 +198,8 @@ todos: [
 
 ### Extras 区域
 
+Extras 支持**任意数量和名称**的 card，每个 card 自由定义 label / content / type：
+
 ```javascript
 extras: {
   testing: {
@@ -181,12 +211,24 @@ extras: {
     type: 'ok',                            // 颜色：空='' / 'ok'='绿' / 'info'='蓝' / 'warn'='黄'
     content: '...'
   },
-  tracking: {
-    label: '埋点规划',
-    content: '...'
+  myCard: {                                // ★ 任意 key
+    label: '自定义卡片',
+    content: '内容',
+    type: 'info'                            // 可选：''/'ok'/'info'/'warn'
   }
 }
 ```
+
+### Gantt 类型速查
+
+| 类型 | 说明 | CSS 颜色 |
+|------|------|---------|
+| `ix` | 交互设计 | 蓝 |
+| `vis` | 视觉设计 | 紫 |
+| `fe` | 前端开发 | 青 |
+| `be` | 后端开发 | 黄 |
+| `tool` | 工具/基础设施 | 绿 |
+| `test` | 测试 | 玫瑰红 |
 
 ---
 

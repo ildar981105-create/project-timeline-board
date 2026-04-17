@@ -168,7 +168,7 @@ function renderKeyNodes() {
 function renderGantt() {
   var ganttDates = document.getElementById('ganttDates');
   var ganttBody  = document.getElementById('ganttBody');
-  if (!ganttDates || !ganttBody || !cfg.gantt) return;
+  if (!ganttDates || !ganttBody || !(cfg.gantt || cfg.ganttData)) return;
 
   var S = cfg.ganttStart || 7;
   var E = cfg.ganttEnd   || 22;
@@ -190,7 +190,7 @@ function renderGantt() {
   var tp = TODAY > 0 ? ((TODAY - S + 0.5) / cols) * 100 : -10;
   var colorMap = cfg.ganttColorMap || { ix:{cls:'ix',label:'交互'}, vis:{cls:'vis',label:'视觉'}, tool:{cls:'tool',label:'工具'} };
 
-  cfg.gantt.forEach(function(row) {
+  (cfg.gantt || cfg.ganttData || []).forEach(function(row) {
     var label = row[0];
     var bars   = row[1] || [];
     var r = document.createElement('div');
@@ -219,16 +219,15 @@ function renderTodos() {
   var container = document.querySelector('.container');
   if (!container || !cfg.todos) return;
 
-  // 找到 todos section（id="todos"）
   var todosSection = document.getElementById('todos');
   if (!todosSection) return;
 
-  var tagLabels = { ix:'交互', vis:'视觉', plan:'规划', collab:'协作', tool:'工具' };
+  var tagLabels = { ix:'交互', vis:'视觉', plan:'规划', collab:'协作', tool:'工具', fe:'前端', be:'后端', test:'测试' };
 
   todosSection.innerHTML =
     '<div class="sl">03 — To-Do</div>' +
     '<div class="st">待办事项</div>' +
-    '<div class="sd">点击切换完成状态。标签标注交互/视觉。</div>' +
+    '<div class="sd">点击切换完成状态。</div>' +
     cfg.todos.map(function(group) {
       return '<div class="todo-g">' +
         '<div class="todo-gh"><span class="todo-gl">' + group.period + '</span><span class="todo-gc">' + group.count + '项</span></div>' +
@@ -243,22 +242,23 @@ function renderTodos() {
 }
 
 // ============================================================
-// 6. Extras Callout
+// 6. Extras Callout（支持任意数量和名称的 card）
 // ============================================================
 function renderExtras() {
   var extrasSection = document.getElementById('extra');
   if (!extrasSection || !cfg.extras) return;
 
-  var typeMap = { testing:'', status:'ok', tracking:'info' };
+  // 支持任意 key 的 card，自动识别 type 字段
+  var cards = Object.keys(cfg.extras).map(function(key) {
+    var card = cfg.extras[key];
+    var cls = card.type || '';
+    return '<div class="co ' + cls + '"><div class="co-t">' + card.label + '</div><div class="co-b">' + card.content + '</div></div>';
+  }).join('');
 
   extrasSection.innerHTML =
     '<div class="sl">04 — Extras</div>' +
-    '<div class="st">用户测试 & 埋点</div>' +
-    '<div class="co-grid">' +
-      (cfg.extras.testing ? '<div class="co ' + (typeMap.testing || '') + '"><div class="co-t">' + cfg.extras.testing.label + '</div><div class="co-b">' + cfg.extras.testing.content + '</div></div>' : '') +
-      (cfg.extras.status  ? '<div class="co ' + (cfg.extras.status.type || 'ok') + '"><div class="co-t">' + cfg.extras.status.label + '</div><div class="co-b">' + cfg.extras.status.content + '</div></div>' : '') +
-      (cfg.extras.tracking ? '<div class="co"><div class="co-t">' + cfg.extras.tracking.label + '</div><div class="co-b">' + cfg.extras.tracking.content + '</div></div>' : '') +
-    '</div>';
+    '<div class="st">关注事项</div>' +
+    '<div class="co-grid">' + cards + '</div>';
 }
 
 // ============================================================
